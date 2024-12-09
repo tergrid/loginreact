@@ -3,66 +3,83 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import styled from "@emotion/styled";
 import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
-import "./login.css"
+import "./login.css";
 
 const PageWrapper = styled.div`
   display: flex;
-  height: 100vh;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
   background: #ffffe4;
   overflow: hidden;
+  position: relative;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem; /* Ensure spacing between elements */
+  }
 `;
 
 const AstroImage = styled(motion.img)`
-  height: 100%;
-  max-width: 100%;
-  object-fit: contain;
-  margin-right: -40rem;
-  position: relative;
-  left: -5%;
+  max-width: 80%;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1; /* Place behind the FormWrapper */
   animation: rotate 20s linear infinite;
+  opacity: 0.3; /* Subtle transparency for background */
 
   @keyframes rotate {
-    from {
-      transform: rotate(0deg);
+    0% {
+      transform: translate(-50%, -50%) rotate(0deg);
     }
-    to {
-      transform: rotate(360deg);
+    100% {
+      transform: translate(-50%, -50%) rotate(360deg);
     }
+  }
+
+  @media (min-width: 768px) {
+    max-width: 60%;
   }
 `;
 
 const FormWrapper = styled(motion.div)`
-  background: #F6F6DB;
-  padding: 2.5rem; /* Increased padding for a taller box */
-  width: 350px;
-  border-radius: 16px;
-  /*box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);*/
-  display:flex;
-  flex-direction:column;
-  text-align: center;
-  align-item: center;
-  justify-content: center;
-  color: #333;
-  opacity: 1;
+  z-index: 2; /* Ensure it appears above the wheel */
   position: relative;
-  margin-right: 7.5rem;
-  margin-left: 7.5rem;
-  height: 72rem;
-`;
+  background: rgba(255, 255, 255, 0.1); /* Glassmorphic background */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2); /* Softer shadow */
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
 
+  @media (min-width: 768px) {
+    width: 100%;
+  }
+`;
 
 const Title = styled.h1`
   font-family: "Poppins", sans-serif;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   margin-bottom: 1rem;
-  color: #483285;
+  color: #ffa500;
+
+  @media (min-width: 768px) {
+    font-size: 2rem;
+  }
 `;
 
 const InputWrapper = styled.div`
   position: relative;
-  margin: 1.5rem 0;
+  margin: 1rem 0;
   background: #f4f4f4;
   border-radius: 8px;
   overflow: hidden;
@@ -71,13 +88,12 @@ const InputWrapper = styled.div`
 
 const Input = styled.input`
   width: 100%;
-  padding: 1rem;
+  padding: 0.8rem;
   border: none;
   outline: none;
   font-size: 1rem;
   background: transparent;
   color: #333;
-  transition: all 0.3s ease;
 
   &:focus {
     outline: 2px solid #5c2e91;
@@ -136,7 +152,7 @@ const GoogleButton = styled.button`
 
 const LinkWrapper = styled.div`
   display: flex;
-  justify-content: space-between; /* Positioned the links */
+  justify-content: space-between;
   font-size: 0.9rem;
   color: #666;
 
@@ -153,7 +169,7 @@ const LinkWrapper = styled.div`
 
 const CenterLinkWrapper = styled.div`
   display: flex;
-  justify-content: center; /* Centered the sign-up text */
+  justify-content: center;
   font-size: 0.9rem;
   color: #666;
 `;
@@ -197,7 +213,9 @@ function Login() {
   return (
     <PageWrapper>
       <AstroImage
-        src="https://royaltyfreefootages.com/upload/video/Zodiac%20wheel,%20Zodiac%20wheel%20png,%20Zodiac%20wheel%20png%20image,%20Zodiac%20wheel%20transparent%20png%20images%20download_1658935859.png"
+        src="https://royaltyfreefootages.com/upload/video/Zodiac%20wheel,%20Zodiac%20wheel%20p
+ng,%20Zodiac%20wheel%20png%20image,%20Zodiac%20wheel%20transparent%20png%20i
+mages%20download_1658935859.png"
         alt="Astro Illustration"
       />
       <FormWrapper>
